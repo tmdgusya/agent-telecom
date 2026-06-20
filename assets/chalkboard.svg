@@ -1,0 +1,64 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Writable green chalkboard with wooden frame</title>
+  <desc>A large empty classroom chalkboard with subtle chalk texture, wooden frame, chalk tray, eraser, and chalk sticks.</desc>
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9A6338"/>
+      <stop offset="0.45" stop-color="#7B4727"/>
+      <stop offset="1" stop-color="#C18A55"/>
+    </linearGradient>
+    <linearGradient id="board" x1="120" y1="95" x2="1080" y2="635" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#315C4D"/>
+      <stop offset="0.52" stop-color="#244A41"/>
+      <stop offset="1" stop-color="#183A34"/>
+    </linearGradient>
+    <linearGradient id="tray" x1="185" y1="658" x2="1015" y2="703" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#70401F"/>
+      <stop offset="0.5" stop-color="#B77A40"/>
+      <stop offset="1" stop-color="#6B3D20"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0B1210" flood-opacity="0.28"/>
+    </filter>
+    <filter id="softGrain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.08"/>
+      </feComponentTransfer>
+      <feBlend mode="screen" in2="SourceGraphic"/>
+    </filter>
+    <pattern id="woodLines" width="96" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(-5)">
+      <path d="M0 9C18 3 40 15 62 8C76 4 88 6 96 10" stroke="#E0A86B" stroke-opacity="0.24" stroke-width="2"/>
+      <path d="M0 15C21 11 38 20 60 14C75 10 86 12 96 16" stroke="#4A2816" stroke-opacity="0.18" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="chalkDust" width="88" height="88" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="18" r="1.3" fill="#F3F3E8" fill-opacity="0.18"/>
+      <circle cx="49" cy="10" r="0.9" fill="#F3F3E8" fill-opacity="0.14"/>
+      <circle cx="68" cy="44" r="1.1" fill="#F3F3E8" fill-opacity="0.11"/>
+      <circle cx="28" cy="66" r="0.8" fill="#F3F3E8" fill-opacity="0.12"/>
+      <path d="M9 51H31" stroke="#F3F3E8" stroke-opacity="0.045" stroke-width="2" stroke-linecap="round"/>
+      <path d="M48 72H82" stroke="#F3F3E8" stroke-opacity="0.04" stroke-width="2" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="#F4F0E7"/>
+
+  <g filter="url(#shadow)">
+    <rect x="74" y="51" width="1052" height="654" rx="32" fill="url(#wood)"/>
+    <rect x="74" y="51" width="1052" height="654" rx="32" fill="url(#woodLines)" opacity="0.85"/>
+    <rect x="112" y="89" width="976" height="568" rx="14" fill="#132E2A"/>
+    <rect x="128" y="105" width="944" height="526" rx="8" fill="url(#board)" filter="url(#softGrain)"/>
+    <rect x="128" y="105" width="944" height="526" rx="8" fill="url(#chalkDust)"/>
+    <path d="M158 155C299 129 421 140 564 128C726 114 883 128 1040 117" stroke="#F2F2DE" stroke-opacity="0.06" stroke-width="10" stroke-linecap="round"/>
+    <path d="M169 578C295 594 399 570 529 588C703 612 858 587 1032 601" stroke="#F2F2DE" stroke-opacity="0.055" stroke-width="11" stroke-linecap="round"/>
+    <path d="M184 655H1017C1026 655 1033 662 1033 671V681C1033 692 1024 701 1013 701H188C177 701 168 692 168 681V671C168 662 175 655 184 655Z" fill="url(#tray)"/>
+    <path d="M198 663H1001" stroke="#F0BE7A" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round"/>
+    <rect x="776" y="666" width="132" height="23" rx="8" fill="#CFC7BC"/>
+    <rect x="786" y="670" width="112" height="5" rx="2.5" fill="#7F776F" opacity="0.5"/>
+    <rect x="916" y="671" width="86" height="9" rx="4.5" fill="#F3F0E2"/>
+    <rect x="338" y="672" width="78" height="8" rx="4" fill="#E8D4A5"/>
+    <rect x="423" y="672" width="64" height="8" rx="4" fill="#DB8E8E"/>
+    <rect x="493" y="672" width="72" height="8" rx="4" fill="#8DBBD8"/>
+  </g>
+</svg>
