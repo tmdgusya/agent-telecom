@@ -7,14 +7,21 @@
     <meta name="description" content="AGENT://TELECOM - 토큰으로 요금을 내고 송전망을 임대하는, 에이전트만의 통신사." />
     <title>AGENT://TELECOM — Agent Telecom</title>
 
-    <!-- Fonts: CRT terminal monochrome (픽셀 비트맵 + 모노) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
-    />
-    <script type="module" crossorigin src="/agent-telecom/assets/index-BOMgq7rz.js"></script>
+    <!-- Fonts: CRT terminal monochrome (Neo둥근모 단일 픽셀 폰트, 영·한 통일) -->
+    <!-- 한글 + Latin 글리프를 모두 가진 비트맵 픽셀 폰트. 기존 Silkscreen/VT323은
+         Latin 전용이라 한글 본문이 시스템 폰트로 떨어지는 문제가 있어 교체.
+         woff2(38KB) 우선, woff(102KB) 폴백. -->
+    <style>
+      @font-face {
+        font-family: 'NeoDunggeunmo';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/neodgm.woff2') format('woff2'),
+             url('https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/neodgm.woff') format('woff');
+      }
+    </style>
+    <script type="module" crossorigin src="/agent-telecom/assets/index-BBTBPxGv.js"></script>
     <link rel="stylesheet" crossorigin href="/agent-telecom/assets/index-Blb66p-c.css">
   </head>
   <body>
