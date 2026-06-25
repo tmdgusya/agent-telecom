@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Writable Chalkboard</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #f0ebe1;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .stage {
+        width: min(94vw, 1200px);
+      }
+
+      .board {
+        position: relative;
+        aspect-ratio: 1200 / 760;
+        width: 100%;
+        user-select: none;
+      }
+
+      .board img,
+      .board canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .board img {
+        pointer-events: none;
+      }
+
+      .board canvas {
+        cursor: crosshair;
+        touch-action: none;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      button {
+        border: 1px solid #b9b0a0;
+        background: #fffaf1;
+        color: #2c2a25;
+        border-radius: 8px;
+        padding: 9px 14px;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #fff3da;
+      }
+
+      input {
+        width: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="board" aria-label="쓸 수 있는 칠판">
+        <img src="/assets/chalkboard.svg" alt="빈 칠판" />
+        <canvas id="chalkCanvas" width="1200" height="760"></canvas>
+      </div>
+      <div class="controls">
+        <button id="clearButton" type="button">지우기</button>
+        <label>
+          굵기
+          <input id="sizeInput" type="range" min="3" max="18" value="8" />
+        </label>
+      </div>
+    </main>
+
+    <script>
+      const canvas = document.querySelector("#chalkCanvas");
+      const ctx = canvas.getContext("2d");
+      const clearButton = document.querySelector("#clearButton");
+      const sizeInput = document.querySelector("#sizeInput");
+      let isDrawing = false;
+      let lastPoint = null;
+
+      function boardPoint(event) {
+        const rect = canvas.getBoundingClientRect();
+        const pointer = event.touches ? event.touches[0] : event;
+        return {
+          x: ((pointer.clientX - rect.left) / rect.width) * canvas.width,
+          y: ((pointer.clientY - rect.top) / rect.height) * canvas.height,
+        };
+      }
+
+      function insideWritableArea(point) {
+        return point.x >= 128 && point.x <= 1072 && point.y >= 105 && point.y <= 631;
+      }
+
+      function drawChalkLine(from, to) {
+        ctx.save();
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = "rgba(248, 247, 226, 0.88)";
+        ctx.lineWidth = Number(sizeInput.value);
+        ctx.shadowColor = "rgba(255, 255, 238, 0.24)";
+        ctx.shadowBlur = 3;
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+
+        ctx.globalAlpha = 0.18;
+        for (let i = 0; i < 4; i += 1) {
+          ctx.beginPath();
+          ctx.moveTo(from.x + Math.random() * 6 - 3, from.y + Math.random() * 6 - 3);
+          ctx.lineTo(to.x + Math.random() * 6 - 3, to.y + Math.random() * 6 - 3);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function start(event) {
+        const point = boardPoint(event);
+        if (!insideWritableArea(point)) return;
+        event.preventDefault();
+        isDrawing = true;
+        lastPoint = point;
+      }
+
+      function move(event) {
+        if (!isDrawing) return;
+        const point = boardPoint(event);
+        if (!insideWritableArea(point)) return;
+        event.preventDefault();
+        drawChalkLine(lastPoint, point);
+        lastPoint = point;
+      }
+
+      function stop() {
+        isDrawing = false;
+        lastPoint = null;
+      }
+
+      canvas.addEventListener("mousedown", start);
+      canvas.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", stop);
+      canvas.addEventListener("touchstart", start, { passive: false });
+      canvas.addEventListener("touchmove", move, { passive: false });
+      window.addEventListener("touchend", stop);
+      clearButton.addEventListener("click", () => ctx.clearRect(0, 0, canvas.width, canvas.height));
+    </script>
+  </body>
+</html>
